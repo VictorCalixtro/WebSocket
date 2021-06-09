@@ -35,6 +35,19 @@ type WsJsonResponse struct {
 	MessageType string `json:"message_type"`
 }
 
+type WebSocketConnection struct {
+	*websocket.Conn
+}
+
+type WsPayload struct {
+
+	Action      string `json:"action"`
+	UserName     string `json:"username"`
+	Message     string `json:"message"`
+	Conn WebSocketConnection `json:"-"`
+}
+
+
 // WsEndpoint upgrades connection to websocket
 func WsEndpoint(w http.ResponseWriter, r *http.Request) {
 	ws, err := upgradeConnection.Upgrade(w, r, nil)
