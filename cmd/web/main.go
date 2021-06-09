@@ -1,12 +1,17 @@
 package main
 
 import (
+	"WebSocket/internal/handlers"
 	"log"
 	"net/http"
 )
 
 func main() {
 	mux := routes()
+
+	log.Println("Starting chan listener")
+	go handlers.ListenToWsChannel()
+
 
 	log.Println("Staring web server on port 8080")
 
